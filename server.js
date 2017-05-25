@@ -10,7 +10,7 @@ var db_url = process.env.DATABASE_URL || DATABASE_URL;
 
 
 var wolfram = require('wolfram').createClient("KXK5UH-4889P8PXHH");
-
+const botName ='Dr. Rai';
 // wolfram.query("integrate 2x", function(err, result) {
 //   if(err) throw err
 //   console.log("Result: %j", result)
@@ -49,14 +49,14 @@ io.on('connection', function (socket) {
   socket.on('new message', function (data) {
     // we tell the client to execute 'new message'
 
-    wolfram.query(data, function(err, result) {
-        if(err) throw err
-        socket.emit('search', {
-          username: 'Alexa',
-          message:  result
-        });
-        //console.log("Result: %j", result)
-      });
+    // wolfram.query(data, function(err, result) {
+    //     if(err) console.log(err);
+    //     socket.emit('search', {
+    //       username: 'Alexa',
+    //       message:  result
+    //     });
+      
+    //   });
     socket.broadcast.emit('new message', {
       username: socket.username,
       message: data 
@@ -68,7 +68,7 @@ io.on('connection', function (socket) {
   socket.on('new message by bot', function (data) {
     //we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
-      username: "Alexa",
+      username: botName,
       message:  data
     });
   });

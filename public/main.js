@@ -119,6 +119,8 @@ function stopMic() {
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
 
+  var $sendbtn = $("#sendbtn");
+
   // Prompt for setting a username
 
   var username;
@@ -126,7 +128,7 @@ function stopMic() {
   var typing = false;
   var lastTypingTime;
   var $currentInput = $usernameInput.focus();
-
+  const botName ='Dr. Rai';
 
 
   $window.on("blur focus", function(e) {
@@ -161,7 +163,7 @@ function stopMic() {
   }
   //Add Chat bot
   function setBotName(){
-    username= "Alexa";
+    username= botName;
     socket.emit('add user', username);
   }
 
@@ -186,9 +188,9 @@ function stopMic() {
   function sendMessageByBot(message){
     message=cleanInput(message);
     addChatMessage({
-        username: "Alexa",
+        username: botName,
         message: message
-      });
+      },{isBot:true});
       // tell server to execute 'new message' and send along one parameter
       socket.emit('new message by bot', message);
   }
@@ -207,9 +209,8 @@ function stopMic() {
       });
       // tell server to execute 'new message' and send along one parameter
       socket.emit('new message', message);
-    }
 
-    sendText(message)
+      sendText(message)
       .then(function(response) {
         var result;
         try {
@@ -227,11 +228,15 @@ function stopMic() {
         //setResponseOnNode("Something goes wrong", responseNode);
         console.log("Error",err);
       });
+    }
+
+    
   }
 
   // Log a message
   function log (message, options) {
     var $el = $('<li>').addClass('log').text(message);
+    Materialize.toast(message, 3000) 
     addMessageElement($el, options);
   }
 
@@ -245,9 +250,25 @@ function stopMic() {
       $typingMessages.remove();
     }
 
+    console.log(options);
+
     var $usernameDiv = $('<span class="username"/>')
       .text(data.username)
       .css('color', getUsernameColor(data.username));
+
+       $usernameDiv = $(`<div class="chip">
+    <img src="./images/download.gif" alt="Contact Person">
+    ${data.username}
+  </div>`).css('color', getUsernameColor(data.username)); 
+
+      if(options.hasOwnProperty("isBot"))
+      {
+         $usernameDiv = $(`<div class="chip">
+      <i class="material-icons">android</i>
+    ${data.username}
+  </div>`).css('color', getUsernameColor(data.username)); 
+      }
+
       var $messageBodyDiv ='';
       if(typeof data.message === 'string'){
          $messageBodyDiv = $('<span class="messageBody">').text(data.message);
@@ -365,7 +386,14 @@ function stopMic() {
     return COLORS[index];
   }
 
+
+
+  $sendbtn.on("click",sendMessage);
+
+ 
+
   // Keyboard events
+ 
 
   $window.keydown(function (event) {
     // Auto-focus the current input when a key is typed
@@ -374,7 +402,7 @@ function stopMic() {
     }
     // When the client hits ENTER on their keyboard
     if (event.which === 13) {
-      if (username && username!=="Alexa") {
+      if (username && username!==botName) {
         sendMessage();
         socket.emit('stop typing');
         typing = false;
@@ -453,4 +481,7 @@ function stopMic() {
     removeChatTyping(data);
     document.title ='Kunal let\'s talk app';
   });
+
+
+
 });
