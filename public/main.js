@@ -237,7 +237,7 @@ function stopMic() {
   function log (message, options) {
     var $el = $('<li>').addClass('log').text(message);
     Materialize.toast(message, 3000) 
-    addMessageElement($el, options);
+    //addMessageElement($el, options);
   }
 
   // Adds the visual chat message to the message list

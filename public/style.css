@@ -46,6 +46,11 @@ ul {
   width: 100%;
 }
 
+.chatpage{
+  height: 80%;
+  
+}
+
 /* Login Page */
 
 .login.page {
@@ -114,7 +119,7 @@ ul {
 
 .chatArea {
   height: 100%;
-  padding-bottom: 60px;
+  
 }
 
 .messages {
@@ -167,4 +172,27 @@ ul {
 .footer{
   clear: both;
   position: relative;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 2px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(255,0,0,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,0,0,0.4); 
 }
