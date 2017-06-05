@@ -236,14 +236,14 @@ function stopMic() {
       if(options.hasOwnProperty("isBot"))
       {
          $usernameDiv = $(`<div class="chip">
-      <i class="material-icons">android</i>
+      <i class="material-icons bot-width">android</i>
     ${data.username}
   </div>`).css('color', getUsernameColor(data.username)); 
       }
 
       var $messageBodyDiv ='';
       if(typeof data.message === 'string'){
-         $messageBodyDiv = $('<span class="messageBody">').text(data.message);
+         $messageBodyDiv = $('<div class="bubble"><span class="messageBody"></div>').text(data.message);
       }
       else
       {
