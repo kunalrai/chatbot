@@ -8,42 +8,51 @@
   <link rel="shortcut icon" type="image/png" href="favicon.png"/> 
   <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
-  
+
 </head>
 <body>
 
   <ul class="pages">
     <li class="chat page chatpage">
-      <div class="chatArea">
-        <ul class="messages"></ul>
+      <div class="header">
+        An intelligent bot engine.
       </div>
+      <div class="chatArea">
+          <ul class="messages"></ul>
+      </div>
+     
       <div class="container">
         <div class="row">
-    
-          <div class="col s11">
-            <input class="inputMessage" placeholder="Type here..."/>
+          <div class="col s10">
+            <span id="interim"></span>
+            <input class="inputMessage" id="inputMessage" placeholder="Type here..."/>
           </div>
           <div class="col s1">
-             <a id="sendbtn" class="btnStart waves-effect waves-light btn" ><i class="material-icons right">comment</i></a>
+             <a id="sendbtn" class="btnStart waves-effect waves-light btn" ><i class="material-icons right">mic</i></a>
           </div>
+          
         </div>
-       
       </div>
       
     </li>
     <li class="login page">
+      <div class="well">A mathamtical knowledge engine.</div>
       <div class="form">
         <h3 class="title">What's your nickname?</h3>
         <input class="usernameInput" type="text" maxlength="14" />
       </div>
     </li>
   </ul>
+ </div>
+    
 
- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+ <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+
  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   <script src="/ApiAi.js"></script>
   <script src="/socket.io.js"></script>
   <script src="/main.js"></script>
-
+  <script src="/speech.js"></script>
 </body>
 </html>

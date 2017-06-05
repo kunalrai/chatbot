@@ -48,15 +48,19 @@ io.on('connection', function (socket) {
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
     // we tell the client to execute 'new message'
-
-    wolfram.query(data, function(err, result) {
-        if(err) console.log(err);
-        socket.emit('search', {
-          username: 'Alexa',
-          message:  result
-        });
+    
+    // wolfram.query(data, function(err, result) {
+    //     if(err) console.log(err);
+    //     socket.broadcast.emit('search', {
+    //       username: botName,
+    //       message:  result
+    //     });
+    //     socket.emit('search', {
+    //       username: botName,
+    //       message:  result
+    //     });
       
-      });
+    //   });
     socket.broadcast.emit('new message', {
       username: socket.username,
       message: data 

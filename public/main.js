@@ -60,37 +60,13 @@ $(function() {
   console.log("> ON RESULTS", results);
   }
 
-    // request permission on page load
-    document.addEventListener('DOMContentLoaded', function () {
-        if (Notification.permission !== "granted")
-            Notification.requestPermission();
-    });
+   
 
     
 
     var agentState= {};
 
-    function notifyMe(data) {
-        if (!Notification) {
-            alert('Desktop notifications not available in your browser. Try Chromium.');
-            return;
-        }
-
-        if (Notification.permission !== "granted")
-            Notification.requestPermission();
-        else if(agentState){
-            var notification = new Notification('Notification title', {
-                icon: 'http://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png',
-                body: data
-            });
-
-            notification.onclick = function () {
-                window.open("http://localhost:3000");
-            };
-
-        }
-
-    }
+   
 
 function sendText(text) {
   return client.textRequest(text);
@@ -141,6 +117,7 @@ function stopMic() {
                     break;
                 case "focus":
                     agentState = true;
+                 
                     break;
             }
         }
@@ -236,7 +213,8 @@ function stopMic() {
   // Log a message
   function log (message, options) {
     var $el = $('<li>').addClass('log').text(message);
-    Materialize.toast(message, 3000) 
+    Materialize.toast(message, 3000);
+    $('.users').text(message);
     //addMessageElement($el, options);
   }
 
@@ -386,10 +364,29 @@ function stopMic() {
     return COLORS[index];
   }
 
+ 
+ //$sendbtn.ontouchstart = startRecording;
+ //$sendbtn.ontouchend = stopRecording;
 
+function startRecording(){
+  console.log("mouse down...");
+   if (!recognizing) 
+   {
+     speech.start();
+   }
+}
 
-  $sendbtn.on("click",sendMessage);
+function stopRecording(){
+  console.log("mouse up");
+  if (recognizing) {
+    speech.stop();
+    reset();
+  }
+}
 
+$sendbtn.on("click",sendMessage);
+$sendbtn.on('mousedown touchstart',startRecording);
+$sendbtn.on("mouseup",stopRecording);
  
 
   // Keyboard events
@@ -458,7 +455,7 @@ function stopMic() {
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
     addParticipantsMessage(data);
-    notifyMe(data.username + ' joined');
+    
   });
 
   // Whenever the server emits 'user left', log it in the chat body
@@ -467,7 +464,7 @@ function stopMic() {
 
     addParticipantsMessage(data);
     removeChatTyping(data);
-    notifyMe(data.username + ' left');
+   
   });
 
   // Whenever the server emits 'typing', show the typing message
