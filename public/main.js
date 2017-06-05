@@ -60,13 +60,7 @@ $(function() {
   console.log("> ON RESULTS", results);
   }
 
-   
-
-    
-
-    var agentState= {};
-
-   
+var agentState= {};
 
 function sendText(text) {
   return client.textRequest(text);
@@ -364,10 +358,6 @@ function stopMic() {
     return COLORS[index];
   }
 
- 
- //$sendbtn.ontouchstart = startRecording;
- //$sendbtn.ontouchend = stopRecording;
-
 function startRecording(){
   console.log("mouse down...");
    if (!recognizing) 
@@ -386,12 +376,10 @@ function stopRecording(){
 
 $sendbtn.on("click",sendMessage);
 $sendbtn.on('mousedown touchstart',startRecording);
-$sendbtn.on("mouseup",stopRecording);
+$sendbtn.on("mouseup touchend",stopRecording);
  
 
   // Keyboard events
- 
-
   $window.keydown(function (event) {
     // Auto-focus the current input when a key is typed
     if (!(event.ctrlKey || event.metaKey || event.altKey)) {
@@ -431,7 +419,7 @@ $sendbtn.on("mouseup",stopRecording);
   socket.on('login', function (data) {
     connected = true;
     // Display the welcome message
-    var message = "Welcome to Kunal.Rai Chat – ";
+    var message = "Welcome to Kunal Rai Chat  ";
     log(message, {
       prepend: true
     });

@@ -127,7 +127,7 @@ ul {
 /* Messages */
 
 .chatArea {
-  height: 59%;
+  height: 81%;
   width: 100%;
   float: left;
  
@@ -215,8 +215,8 @@ ul {
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
     background: rgba(255,0,0,0.8); 
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
@@ -235,6 +235,10 @@ ul {
 
 .material-icons{
   width: 10px;
+}
+
+.row{
+  margin-bottom: 0px !important;
 }
 
 #toast-container{

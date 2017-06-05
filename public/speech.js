@@ -9,7 +9,8 @@
             transcription = document.getElementById('interim'),
             interim_span = document.getElementById('interim');
             inputMessage = document.getElementById('inputMessage');
-        interim_span.style.opacity = '0.5';
+            $log = document.getElementById("log");
+            interim_span.style.opacity = '0.5';
  function reset() {
           transcription.innerHTML = '';
           interim_span.innerHTML = '';
@@ -25,26 +26,27 @@
         upgrade();
       } else {
 
-        document.onkeydown = function(e) {
-          if (e.key === "q") {
-            if (!recognizing) {
-              speech.start();
-            }
-          }
-        };
+        // document.onkeydown = function(e) {
+        //   if (e.key === "q") {
+        //     if (!recognizing) {
+        //       speech.start();
+        //     }
+        //   }
+        // };
 
-        document.onkeyup = function(e) {
-          if (e.key === "q") {
-            if (recognizing) {
-              speech.stop();
-              reset();
-            }
-          }
-        };
+        // document.onkeyup = function(e) {
+        //   if (e.key === "q") {
+        //     if (recognizing) {
+        //       speech.stop();
+        //       reset();
+        //     }
+        //   }
+        // };
 
         speech.onstart = function() {
             // When recognition begins
             recognizing = true;
+             $log.innerHTML="Speaking!";
             console.log("Speaking!");
         };
 
@@ -67,18 +69,18 @@
             inputMessage.value = final_transcript;
 
 
-            var makeArray = final_transcript.split(' ');
-            var bColor = makeArray.splice(-3);
-            // change background color
-            if ((/^change /g.test(final_transcript)) && (/background color/g.test(final_transcript))) {
-              if (bColor[0] === 'to') {
-                document.body.style.backgroundColor = bColor[1] + bColor[2];
-              } else if (bColor[1] === 'to') {
-                document.body.style.backgroundColor = bColor[2];
-              } else {
-                document.body.style.backgroundColor = bColor[0] + bColor[1] + bColor[2];
-              }
-            }
+            // var makeArray = final_transcript.split(' ');
+            // var bColor = makeArray.splice(-3);
+            // // change background color
+            // if ((/^change /g.test(final_transcript)) && (/background color/g.test(final_transcript))) {
+            //   if (bColor[0] === 'to') {
+            //     document.body.style.backgroundColor = bColor[1] + bColor[2];
+            //   } else if (bColor[1] === 'to') {
+            //     document.body.style.backgroundColor = bColor[2];
+            //   } else {
+            //     document.body.style.backgroundColor = bColor[0] + bColor[1] + bColor[2];
+            //   }
+            // }
         };
 
         speech.onerror = function(event) {
@@ -88,6 +90,8 @@
 
         speech.onend = function() {
             // When recognition ends
+           
+            $log.innerHTML = "Press and hold mic button to speak!";
             console.log("Press and hold mic button to speak!");
             reset();
         };
