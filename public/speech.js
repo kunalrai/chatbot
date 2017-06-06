@@ -69,18 +69,18 @@
             inputMessage.value = final_transcript;
 
 
-            // var makeArray = final_transcript.split(' ');
-            // var bColor = makeArray.splice(-3);
-            // // change background color
-            // if ((/^change /g.test(final_transcript)) && (/background color/g.test(final_transcript))) {
-            //   if (bColor[0] === 'to') {
-            //     document.body.style.backgroundColor = bColor[1] + bColor[2];
-            //   } else if (bColor[1] === 'to') {
-            //     document.body.style.backgroundColor = bColor[2];
-            //   } else {
-            //     document.body.style.backgroundColor = bColor[0] + bColor[1] + bColor[2];
-            //   }
-            // }
+            var makeArray = final_transcript.split(' ');
+            var bColor = makeArray.splice(-3);
+            // change background color
+            if ((/^change /g.test(final_transcript)) && (/background color/g.test(final_transcript))) {
+              if (bColor[0] === 'to') {
+                document.body.style.backgroundColor = bColor[1] + bColor[2];
+              } else if (bColor[1] === 'to') {
+                document.body.style.backgroundColor = bColor[2];
+              } else {
+                document.body.style.backgroundColor = bColor[0] + bColor[1] + bColor[2];
+              }
+            }
         };
 
         speech.onerror = function(event) {

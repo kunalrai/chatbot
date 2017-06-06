@@ -1,8 +1,8 @@
 "use strict";
 
 
-$(function() {
-  var token= "b716c2d7a00b44b88cf0c8600d92505b";
+$(function () {
+  var token = "b716c2d7a00b44b88cf0c8600d92505b";
   var client, streamClient;
   var FADE_TIME = 150; // ms
   var TYPING_TIMER_LENGTH = 400; // ms
@@ -16,71 +16,71 @@ $(function() {
   if (streamClient) {
     streamClient.close();
   }
-  
-  client = new ApiAi.ApiAiClient({accessToken: token, streamClientClass: ApiAi.ApiAiStreamClient});
-  
+
+  client = new ApiAi.ApiAiClient({ accessToken: token, streamClientClass: ApiAi.ApiAiStreamClient });
+
   streamClient = client.createStreamClient();
   console.log(client.createStreamClient());
   streamClient.init();
 
-  streamClient.onInit = function() {
+  streamClient.onInit = function () {
     console.log("> ON INIT use direct assignment property");
     streamClient.open();
   };
 
-  streamClient.onStartListening = function() {
+  streamClient.onStartListening = function () {
     console.log("> ON START LISTENING");
   };
 
-  streamClient.onStopListening = function() {
+  streamClient.onStopListening = function () {
     console.log("> ON STOP LISTENING");
   };
 
-  streamClient.onOpen = function() {
+  streamClient.onOpen = function () {
     console.log("> ON OPEN SESSION");
   };
 
-  streamClient.onClose = function() {
+  streamClient.onClose = function () {
     console.log("> ON CLOSE");
     streamClient.close();
   };
 
   streamClient.onResults = streamClientOnResults;
 
-  streamClient.onError = function(code, data) {
+  streamClient.onError = function (code, data) {
     streamClient.close();
     console.log("> ON ERROR", code, data);
   };
 
-  streamClient.onEvent = function(code, data) {
+  streamClient.onEvent = function (code, data) {
     console.log("> ON EVENT", code, data);
   };
 
   function streamClientOnResults(results) {
-  console.log("> ON RESULTS", results);
+    console.log("> ON RESULTS", results);
   }
 
-var agentState= {};
+  var agentState = {};
 
-function sendText(text) {
-  return client.textRequest(text);
-}
+  function sendText(text) {
+    return client.textRequest(text);
+  }
 
-function tts(text) {
-  return client.ttsRequest(text);
-}
+  function tts(text) {
+    return client.ttsRequest(text);
+  }
 
-function startMic() {
-  streamClient.startListening();
-}
+  function startMic() {
+    streamClient.startListening();
+  }
 
-function stopMic() {
-  streamClient.stopListening();
-}
+  function stopMic() {
+    streamClient.stopListening();
+  }
 
 
   // Initialize varibles
-  
+
   var $window = $(window);
   var $usernameInput = $('.usernameInput'); // Input for username
   var $messages = $('.messages'); // Messages area
@@ -98,34 +98,34 @@ function stopMic() {
   var typing = false;
   var lastTypingTime;
   var $currentInput = $usernameInput.focus();
-  const botName ='Dr. Rai';
+  const botName = 'Dr. Rai';
 
 
-  $window.on("blur focus", function(e) {
-        var prevType = $(this).data("prevType");
+  $window.on("blur focus", function (e) {
+    var prevType = $(this).data("prevType");
 
-        if (prevType != e.type) {   //  reduce double fire issues
-            switch (e.type) {
-                case "blur":
-                    agentState = false;
-                    break;
-                case "focus":
-                    agentState = true;
-                 
-                    break;
-            }
-        }
+    if (prevType != e.type) {   //  reduce double fire issues
+      switch (e.type) {
+        case "blur":
+          agentState = false;
+          break;
+        case "focus":
+          agentState = true;
 
-        $(this).data("prevType", e.type);
-    });
+          break;
+      }
+    }
+
+    $(this).data("prevType", e.type);
+  });
   var socket = io();
-  
+
   setBotName();
-  
-  function addParticipantsMessage (data) {
+
+  function addParticipantsMessage(data) {
     var message = '';
     if (data.numUsers === 1) {
-      message += "there's 1 participant" ;
+      message += "there's 1 participant";
     } else {
       message += "there are " + data.numUsers + " participants";
     }
@@ -133,14 +133,14 @@ function stopMic() {
 
   }
   //Add Chat bot
-  function setBotName(){
-    username= botName;
+  function setBotName() {
+    username = botName;
     socket.emit('add user', username);
   }
 
 
   // Sets the client's username
-  function setUsername () {
+  function setUsername() {
     username = cleanInput($usernameInput.val().trim());
 
     // If the username is valid
@@ -152,22 +152,22 @@ function stopMic() {
 
       // Tell the server your username
       socket.emit('add user', username);
-     
+
     }
   }
 
-  function sendMessageByBot(message){
-    message=cleanInput(message);
+  function sendMessageByBot(message) {
+    message = cleanInput(message);
     addChatMessage({
-        username: botName,
-        message: message
-      },{isBot:true});
-      // tell server to execute 'new message' and send along one parameter
-      socket.emit('new message by bot', message);
+      username: botName,
+      message: message
+    }, { isBot: true });
+    // tell server to execute 'new message' and send along one parameter
+    socket.emit('new message by bot', message);
   }
 
   // Sends a chat message
-  function sendMessage () {
+  function sendMessage() {
     var message = $inputMessage.val();
     // Prevent markup from being injected into the message
     message = cleanInput(message);
@@ -182,30 +182,31 @@ function stopMic() {
       socket.emit('new message', message);
 
       sendText(message)
-      .then(function(response) {
-        var result;
-        try {
-          result = response.result.fulfillment.speech
-        } catch(error) {
-          result = "";
-        }
-        //setResponseJSON(response);
-        console.log(result);
-        sendMessageByBot(result);
-        //setResponseOnNode(result, responseNode);
-      })
-      .catch(function(err) {
-        //setResponseJSON(err);
-        //setResponseOnNode("Something goes wrong", responseNode);
-        console.log("Error",err);
-      });
+        .then(function (response) {
+          var result;
+          try {
+            result = response.result.fulfillment.speech
+          } catch (error) {
+            result = "";
+          }
+          //setResponseJSON(response);
+          executeAction(response.result);
+          console.log(response.result);
+          sendMessageByBot(result);
+          //setResponseOnNode(result, responseNode);
+        })
+        .catch(function (err) {
+          //setResponseJSON(err);
+          //setResponseOnNode("Something goes wrong", responseNode);
+          console.log("Error", err);
+        });
     }
 
-    
+
   }
 
   // Log a message
-  function log (message, options) {
+  function log(message, options) {
     var $el = $('<li>').addClass('log').text(message);
     Materialize.toast(message, 3000);
     $('.users').text(message);
@@ -213,7 +214,7 @@ function stopMic() {
   }
 
   // Adds the visual chat message to the message list
-  function addChatMessage (data, options) {
+  function addChatMessage(data, options) {
     // Don't fade the message in if there is an 'X was typing'
     var $typingMessages = getTypingMessages(data);
     options = options || {};
@@ -228,34 +229,32 @@ function stopMic() {
       .text(data.username)
       .css('color', getUsernameColor(data.username));
 
-       $usernameDiv = $(`<div class="chip">
+    $usernameDiv = $(`<div class="chip">
     <img src="./images/download.gif" alt="Contact Person">
     ${data.username}
-  </div>`).css('color', getUsernameColor(data.username)); 
+  </div>`).css('color', getUsernameColor(data.username));
 
-      if(options.hasOwnProperty("isBot"))
-      {
-         $usernameDiv = $(`<div class="chip">
+    if (options.hasOwnProperty("isBot")) {
+      $usernameDiv = $(`<div class="chip">
       <i class="material-icons bot-width">android</i>
     ${data.username}
-  </div>`).css('color', getUsernameColor(data.username)); 
-      }
+  </div>`).css('color', getUsernameColor(data.username));
+    }
 
-      var $messageBodyDiv ='';
-      if(typeof data.message === 'string'){
-         $messageBodyDiv = $('<div class="bubble"><span class="messageBody"></div>').text(data.message);
-      }
-      else
-      {
-         $messageBodyDiv = $('<span class="messageBody">').text(JSON.stringify(data.message));
+    var $messageBodyDiv = '';
+    if (typeof data.message === 'string') {
+      $messageBodyDiv = $('<div class="bubble"><span class="messageBody"></div>').text(data.message);
+    }
+    else {
+      $messageBodyDiv = $('<span class="messageBody">').text(JSON.stringify(data.message));
 
-       $messageBodyDiv =  data.message.map(function(x){
-         var str = `<span class="messageBody">
+      $messageBodyDiv = data.message.map(function (x) {
+        var str = `<span class="messageBody">
 
-            <img  src=`+x.subpods[0].image+`></img>
+            <img  src=`+ x.subpods[0].image + `></img>
 
             </span><br/>`
-            return str;
+        return str;
 
       });
     }
@@ -270,14 +269,14 @@ function stopMic() {
   }
 
   // Adds the visual chat typing message
-  function addChatTyping (data) {
+  function addChatTyping(data) {
     data.typing = true;
     data.message = 'is typing';
     addChatMessage(data);
   }
 
   // Removes the visual chat typing message
-  function removeChatTyping (data) {
+  function removeChatTyping(data) {
     getTypingMessages(data).fadeOut(function () {
       $(this).remove();
     });
@@ -288,7 +287,7 @@ function stopMic() {
   // options.fade - If the element should fade-in (default = true)
   // options.prepend - If the element should prepend
   //   all other messages (default = false)
-  function addMessageElement (el, options) {
+  function addMessageElement(el, options) {
     var $el = $(el);
 
     // Setup default options
@@ -315,12 +314,12 @@ function stopMic() {
   }
 
   // Prevents input from having injected markup
-  function cleanInput (input) {
+  function cleanInput(input) {
     return $('<div/>').text(input).text();
   }
 
   // Updates the typing event
-  function updateTyping () {
+  function updateTyping() {
     if (connected) {
       if (!typing) {
         typing = true;
@@ -340,44 +339,43 @@ function stopMic() {
   }
 
   // Gets the 'X is typing' messages of a user
-  function getTypingMessages (data) {
+  function getTypingMessages(data) {
     return $('.typing.message').filter(function (i) {
       return $(this).data('username') === data.username;
     });
   }
 
   // Gets the color of a username through our hash function
-  function getUsernameColor (username) {
+  function getUsernameColor(username) {
     // Compute hash code
     var hash = 7;
     for (var i = 0; i < username.length; i++) {
-       hash = username.charCodeAt(i) + (hash << 5) - hash;
+      hash = username.charCodeAt(i) + (hash << 5) - hash;
     }
     // Calculate color
     var index = Math.abs(hash % COLORS.length);
     return COLORS[index];
   }
 
-function startRecording(){
-  console.log("mouse down...");
-   if (!recognizing) 
-   {
-     speech.start();
-   }
-}
-
-function stopRecording(){
-  console.log("mouse up");
-  if (recognizing) {
-    speech.stop();
-    reset();
+  function startRecording() {
+    console.log("mouse down...");
+    if (!recognizing) {
+      speech.start();
+    }
   }
-}
 
-$sendbtn.on("click",sendMessage);
-$sendbtn.on('mousedown touchstart',startRecording);
-$sendbtn.on("mouseup touchend",stopRecording);
- 
+  function stopRecording() {
+    console.log("mouse up");
+    if (recognizing) {
+      speech.stop();
+      reset();
+    }
+  }
+
+  $sendbtn.on("click", sendMessage);
+  $sendbtn.on('mousedown touchstart', startRecording);
+  $sendbtn.on("mouseup touchend", stopRecording);
+
 
   // Keyboard events
   $window.keydown(function (event) {
@@ -387,7 +385,7 @@ $sendbtn.on("mouseup touchend",stopRecording);
     }
     // When the client hits ENTER on their keyboard
     if (event.which === 13) {
-      if (username && username!==botName) {
+      if (username && username !== botName) {
         sendMessage();
         socket.emit('stop typing');
         typing = false;
@@ -397,7 +395,7 @@ $sendbtn.on("mouseup touchend",stopRecording);
     }
   });
 
-  $inputMessage.on('input', function() {
+  $inputMessage.on('input', function () {
     updateTyping();
   });
 
@@ -428,22 +426,22 @@ $sendbtn.on("mouseup touchend",stopRecording);
 
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
-    
+
     addChatMessage(data);
-    
+
   });
 
-    socket.on('search', function (data) {
-    
+  socket.on('search', function (data) {
+
     addChatMessage(data);
-    
+
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
     addParticipantsMessage(data);
-    
+
   });
 
   // Whenever the server emits 'user left', log it in the chat body
@@ -452,19 +450,19 @@ $sendbtn.on("mouseup touchend",stopRecording);
 
     addParticipantsMessage(data);
     removeChatTyping(data);
-   
+
   });
 
   // Whenever the server emits 'typing', show the typing message
   socket.on('typing', function (data) {
     addChatTyping(data);
-      document.title = data.username + ' typing...';
+    document.title = data.username + ' typing...';
   });
 
   // Whenever the server emits 'stop typing', kill the typing message
   socket.on('stop typing', function (data) {
     removeChatTyping(data);
-    document.title ='Kunal let\'s talk app';
+    document.title = 'Kunal let\'s talk app';
   });
 
 
