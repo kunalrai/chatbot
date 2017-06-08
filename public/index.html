@@ -1,45 +1,43 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Let's talk</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" type="image/png" href="favicon.png"/> 
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
   <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
 
 </head>
+
 <body>
 
   <ul class="pages">
     <li class="chat page chatpage">
-      <div class="header">
-      
-          <img src="/images/logo.svg" width="36" height="36"/>
-       <span class="heading"> An intelligent bot engine. </span>
-   
-        
-      
+      <div class="mycontainer">
+          <div class="header">
+        <img src="/images/logo.svg" width="36" height="36" />
+        <span class="heading"> An intelligent bot engine. </span>
       </div>
       <div class="chatArea">
-      <ul class="messages"></ul>
+        <div class="messages"></div>
       </div>
-     
-      <div class="container">
-        <div class="row">
-          <div class="col s10">
+      <div class="container1">
+        <div class="myrow">
+          <div class="cols10">
             <span id="interim"></span>
-            <input class="inputMessage" id="inputMessage" placeholder="Type here..."/>
+            <input class="inputMessage" id="inputMessage" placeholder="Type here..." />
           </div>
-          <div class="col s1">
-             <a id="sendbtn" class="btnStart waves-effect waves-light btn" ><i class="material-icons right">mic</i></a>
+          <div class="cols1">
+            <a id="sendbtn" class="btnStart waves-effect waves-light btn"><i class="material-icons right">mic</i></a>
           </div>
-          
         </div>
         <div id="log">Press and hold mic button to speak!</div>
       </div>
-      
+      </div>
+    
     </li>
     <li class="login page">
       <div class="well">A mathamtical knowledge engine.</div>
@@ -49,17 +47,17 @@
       </div>
     </li>
   </ul>
- </div>
-    
+  </div>
 
 
- <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   <script src="/ApiAi.js"></script>
   <script src="/socket.io.js"></script>
   <script src="/main.js"></script>
   <script src="/speech.js"></script>
   <script src="/action.js"></script>
 </body>
+
 </html>

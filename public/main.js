@@ -1,7 +1,8 @@
-"use strict";
 
 
-$(function () {
+
+//$(function () {
+  "use strict";
   var token = "b716c2d7a00b44b88cf0c8600d92505b";
   var client, streamClient;
   var FADE_TIME = 150; // ms
@@ -191,7 +192,7 @@ $(function () {
           }
           //setResponseJSON(response);
           executeAction(response.result);
-          console.log(response.result);
+          //console.log(response.result);
           sendMessageByBot(result);
           //setResponseOnNode(result, responseNode);
         })
@@ -229,13 +230,13 @@ $(function () {
       .text(data.username)
       .css('color', getUsernameColor(data.username));
 
-    $usernameDiv = $(`<div class="chip">
+    $usernameDiv = $(`<div class="mychip">
     <img src="./images/download.gif" alt="Contact Person">
     ${data.username}
   </div>`).css('color', getUsernameColor(data.username));
 
     if (options.hasOwnProperty("isBot")) {
-      $usernameDiv = $(`<div class="chip">
+      $usernameDiv = $(`<div class="mychip">
       <i class="material-icons bot-width">android</i>
     ${data.username}
   </div>`).css('color', getUsernameColor(data.username));
@@ -260,7 +261,7 @@ $(function () {
     }
 
     var typingClass = data.typing ? 'typing' : '';
-    var $messageDiv = $('<li class="message"/>')
+    var $messageDiv = $('<div class="message"/>')
       .data('username', data.username)
       .addClass(typingClass)
       .append($usernameDiv, $messageBodyDiv);
@@ -467,4 +468,5 @@ $(function () {
 
 
 
-});
+
+//});
