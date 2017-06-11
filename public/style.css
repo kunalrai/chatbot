@@ -120,7 +120,7 @@ ul {
     border-radius: 16px;
     background-color: #e4e4e4;
     margin-bottom: 5px;
-   width: 32%;
+    width: 20%;
 }
 .inputMessage {
   font-size: 100%;
@@ -137,10 +137,9 @@ ul {
 /* Messages */
 
 .chatArea {
-   height: 78%;
+    height: 80%;
     width: 100%;
-    float: left;
-    top: 42px;
+    overflow-y: scroll;
 }
 
 .mycontainer{
@@ -148,6 +147,7 @@ ul {
     flex-direction: column;
     height: 100%;
     justify-content: flex-start;
+    overflow: hidden;
 }
 
 .heading{
@@ -168,9 +168,9 @@ ul {
 }
 
 .messages {
-  height: 100%;
+  /*height: 100%;*/
   margin: 0;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
   left :10px;
   padding: 10px 0px 10px 5px;
   display: flex;
@@ -201,6 +201,13 @@ ul {
   
 }
 
+.qusername{
+    margin-left:2px;
+}
+
+.material-icons{
+  margin-top: 2px;
+}
 /* Input */
 
 .inputMessage {
@@ -221,11 +228,11 @@ ul {
     width:20%;
  
 }
-.container1{
+.inputArea{
   display: flex;
   flex-direction: column;
    text-align: center;
- 
+ height: 12%;
    width: 100%;
 }
 .myrow{
@@ -235,16 +242,81 @@ ul {
 }
 
 .cols10{
-  width: 80%;
+  width: 92%;
 }
 .cols1{
-  width: 20%;
+  width: 8%;
 }
+
+
 
 @media(min-width:1303px){
 .container {
   clear: both;
   width: 100% !important;
+}
+}
+
+@media screen and (max-height:545px){
+  .header{
+     width: 100%;
+ color: #FFF;
+  background: #2b2d33;
+  
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: flex-start;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+  -webkit-transition: -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+  transition: -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+  transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+  transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s, -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+  z-index: 1000;
+  height: 10%;
+  padding: 0px;
+  }
+
+.headerlogo{
+  height: 20px;
+}
+.mychip {
+    display: flex;
+    height: 32px;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 15px;
+    padding: 0 12px;
+    
+    background-color: #e4e4e4;
+    margin-bottom: 5px;
+    width: 20%;
+}
+
+ .inputArea {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 35%;
+    width: 100%;
 }
 }
 
@@ -276,10 +348,10 @@ ul {
 	background: rgba(255,0,0,0.4); 
 }
 
+@media(min-height :546px){
 .header{
  width: 100%;
-  height: 56px;
-  color: #FFF;
+ color: #FFF;
   background: #2b2d33;
   
   font-size: 20px;
@@ -314,6 +386,10 @@ ul {
   transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
   transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s, -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
   z-index: 1000;
+  height: 10%
+
+}
+
 }
 
 

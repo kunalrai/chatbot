@@ -85,6 +85,7 @@
   var $window = $(window);
   var $usernameInput = $('.usernameInput'); // Input for username
   var $messages = $('.messages'); // Messages area
+  var $chatArea = $(".chatArea");//chat area
   var $inputMessage = $('.inputMessage'); // Input message input box
 
   var $loginPage = $('.login.page'); // The login page
@@ -231,14 +232,14 @@
       .css('color', getUsernameColor(data.username));
 
     $usernameDiv = $(`<div class="mychip">
-    <img src="./images/download.gif" alt="Contact Person">
-    ${data.username}
+    <i class="material-icons bot-width">android</i>
+    <div class="qusername"> ${data.username}</div>
   </div>`).css('color', getUsernameColor(data.username));
 
     if (options.hasOwnProperty("isBot")) {
       $usernameDiv = $(`<div class="mychip">
       <i class="material-icons bot-width">android</i>
-    ${data.username}
+    <div class="qusername"> ${data.username}</div>
   </div>`).css('color', getUsernameColor(data.username));
     }
 
@@ -311,7 +312,8 @@
     } else {
       $messages.append($el);
     }
-    $messages[0].scrollTop = $messages[0].scrollHeight;
+    // $messages[0].scrollTop = $messages[0].scrollHeight;
+    $chatArea[0].scrollTop=$chatArea[0].scrollHeight;
   }
 
   // Prevents input from having injected markup
